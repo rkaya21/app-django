@@ -1,22 +1,24 @@
 # pull official base image
 FROM python:3.10-slim
 
-RUN apt-get update
-
-RUN apt-get install python3-dev build-essential -y
+RUN apt-get update && \
+    apt-get install -y python3-dev build-essential && \
+    rm -rf /var/lib/apt/lists/*
 
 # set environment variables
-ENV PYTHONDONTWRITEBYCODE 1
-ENV VIRTUAL_ENV=opt/venv
+ENV PYTHONDONTWRITEBYTECODE 1
+ENV VIRTUAL_ENV /opt/venv
 
 # pip requirements
-RUN pip install --upgrade pip
-RUN pip install virtualenv && python -m virtualenv $VIRTUAL_ENV
+RUN pip install --upgrade pip && \
+    pip install virtualenv && \
+    virtualenv $VIRTUAL_ENV
 
 ENV PATH="$VIRTUAL_ENV/bin:$PATH"
 
-ADD ./requirements.txt /tmp/requirements.txt
-RUN pip install -r /tmp/requirements.txt
+WORKDIR /srv/app
+
+ADD ./requirements.txt /srv/app/requirements.txt
+RUN pip install -r requirements.txt
 
 COPY . /srv/app
-WORKDIR /srv/app
