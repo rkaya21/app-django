@@ -1,3 +1,14 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect, get_object_or_404
+
 
 # Create your views here.
+
+def index(request):
+    return render(request, 'index.html')
+
+def contact_form():
+    return None
+
+
+def contact(request):
+    return None
