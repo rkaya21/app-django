@@ -1,0 +1,35 @@
+<!--================Footer Area =================-->
+<footer class="footer_area p_120">
+    <div class="container">
+        <div class="row footer_inner">
+            <div class="col-lg-5 col-sm-6">
+                <aside class="f_widget ab_widget">
+                    <div class="f_title">
+                        <h3>About Me</h3>
+                    </div>
+                    <p>{{ about_myself_footer }}</p>
+                </aside>
+            </div>
+
+            <div class="col-lg-2">
+            </div>
+
+            <div class="col-lg-4">
+                <aside class="f_widget social_widget">
+                    <div class="f_title">
+                        <h3>Follow Me</h3>
+                    </div>
+                    <p>Let us be social</p>
+                    <ul class="list">
+                        {% for social in social_medias %}
+                            <li><a href="{{ social.link }}" target="_blank">{{ social.icon|safe }}</a></li>
+                        {% endfor %}
+                    </ul>
+                </aside>
+            </div>
+        </div>
+    </div>
+</footer>
+<!--================End Footer Area =================-->
+
+{% include 'includes/scripts.html' %}
